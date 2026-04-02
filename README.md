@@ -1,4 +1,4 @@
-# MAME — Malicious Comment Screening
+# MAME — Malicious Assessment & Moderation Engine
 
 End-to-end screening for user-generated comments: **deterministic rules** for explainability, a **router** for traffic control, and a **TextCNN** for semantic risk scoring when rules do not decide.
 
