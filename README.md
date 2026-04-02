@@ -4,7 +4,7 @@ End-to-end screening for user-generated comments: **deterministic rules** for ex
 
 ## Overview
 
-Large platforms cannot manually review every comment. MAME reduces moderator load by automatically labeling comments as safe vs risky, while keeping an audit trail for rule-based decisions that humans can understand.
+Large platforms cannot manually review every comment. MAME reduces moderator load by automatically labeling comments as safe vs risky, while keeping an audit trail for rule-based decisions that humans can understand. 
 
 ## What counts as “risky”?
 
