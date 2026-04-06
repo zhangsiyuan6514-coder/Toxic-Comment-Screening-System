@@ -1,5 +1,8 @@
 import re
 
+from data.preprocess import clean_text
+
+
 class RuleFilter:
     def __init__(self):
         self.hard_block_keywords = [
@@ -14,11 +17,8 @@ class RuleFilter:
          
 
     def apply(self, text: str) -> str:
-        # Normalize text 
-        # Reduce repeated characters to two
-        # Remove special characters except Chinese characters
-        # Reduce multiple spaces to single space
-        cleaned_text = text.lower().strip()
+        # Same base as model tokenization (clean_text), then rule-specific transforms.
+        cleaned_text = clean_text(text)
         cleaned_text = re.sub(r"([a-z])\1{2,}", r"\1\1", cleaned_text)
         cleaned_text = re.sub(r"[^\w\s\u4e00-\u9fff]+", " ", cleaned_text)
         cleaned_text = re.sub(r"\s+", " ", cleaned_text).strip()
