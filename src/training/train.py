@@ -5,6 +5,7 @@ from pathlib import Path
 
 import numpy as np
 import torch
+from tqdm import tqdm
 import torch.nn as nn
 from torch.utils.data import DataLoader
 
@@ -91,7 +92,14 @@ def main() -> None:
         model.train()
         total_loss = 0.0
         n_batches = 0
-        for xb, yb in train_loader:
+
+        progress_bar = tqdm(
+            train_loader,
+            desc=f"Epoch {epoch}/{args.epochs}",
+            ncols=100
+        )
+
+        for xb, yb in progress_bar:
             xb = xb.to(device)
             yb = yb.to(device)
             optim.zero_grad(set_to_none=True)
@@ -101,6 +109,8 @@ def main() -> None:
             optim.step()
             total_loss += float(loss.item())
             n_batches += 1
+
+            progress_bar.set_postfix(loss=f"{loss.item():.4f}")
 
         val_m = evaluate_model(model, val_loader, device)
         avg_loss = total_loss / max(n_batches, 1)
