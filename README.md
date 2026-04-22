@@ -51,10 +51,38 @@ Older **TF–IDF + logistic regression** `*.joblib` files may still exist under 
 ## Setup
 
 ```bash
-python -m venv .venv
-# Windows: .venv\Scripts\activate
-# macOS/Linux: source .venv/bin/activate
-pip install -r requirements.txt
+# =========================
+# Install PyTorch
+# =========================
+
+# Option 1: CPU user
+python -m pip install torch
+
+# Option 2: GPU user (NVIDIA, standard GPUs)
+# Use this if your GPU is supported by stable PyTorch (e.g., RTX 20/30/40 series)
+python -m pip install torch --index-url https://download.pytorch.org/whl/cu124
+
+# Option 3: GPU (new NVIDIA GPUs, e.g., RTX 50 series)
+# Required for GPUs with compute capability sm_120 (e.g., RTX 5070)
+python -m pip install --pre torch --index-url https://download.pytorch.org/whl/nightly/cu128
+
+
+# =========================
+# Verify installation
+# =========================
+
+python -c "import torch; print(torch.cuda.is_available()); print(torch.cuda.get_arch_list()); print(torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU')"
+
+# Output Example
+True
+['sm_75', 'sm_80', 'sm_86', 'sm_90', 'sm_100', 'sm_120']
+NVIDIA GeForce RTX 5070 Laptop GPU
+
+# =========================
+# Install remaining dependencies
+# =========================
+
+python -m pip install -r requirements.txt
 ```
 
 Place `train.csv` from the Jigsaw competition in `data/raw/`.
