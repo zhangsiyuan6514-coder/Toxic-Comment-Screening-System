@@ -17,6 +17,7 @@ from utils.seed import set_seed
 
 
 def main() -> None:
+#tain各个参数的旋钮
     parser = argparse.ArgumentParser(description="Train TextCNN toxic comment classifier.")
     parser.add_argument("--train-csv", type=str, default="data/processed/train_split.csv")
     parser.add_argument("--val-csv", type=str, default="data/processed/val_split.csv")
@@ -28,9 +29,10 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--num-workers", type=int, default=0)
     parser.add_argument("--device", type=str, default="")
-    args = parser.parse_args()
+    
+    args = parser.parse_args() 
 
-    set_seed(args.seed)
+    set_seed(args.seed) 
 
     device = torch.device(
         args.device if args.device else ("cuda" if torch.cuda.is_available() else "cpu")
